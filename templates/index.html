@@ -2,7 +2,7 @@
 <html lang="en-us">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		
 		<title>Super Cool Link Shortener</title>
 		<link rel="stylesheet" href="static/css/default.css">
@@ -44,6 +44,17 @@
 			  var textregex = /[A-Za-z]/;
 			  return textregex.test(textval);
 			}
+
+			//touch start
+			document.getElementById("col1").addEventListener('touchstart', function(event) {
+			  $(this).toggleClass('active');
+			}, false); 
+			document.getElementById("col2").addEventListener('touchstart', function(event) {
+			  $(this).toggleClass('active');
+			}, false); 
+			document.getElementById("col3").addEventListener('touchstart', function(event) {
+			  $(this).toggleClass('active');
+			}, false); 
 		});
 	</script>
 	<body>
