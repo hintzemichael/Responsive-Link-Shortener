@@ -24,21 +24,17 @@ def index():
     index_title = request.args.get("title", "Aijia's URL Shortener")
     hello_name = request.args.get("name", "Aijia")
    
-    request_header = request.headers
-    request_method = request.method
-   
     response= flask.make_response()
     response.headers['Date']=strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
 
-    response.set_cookie(key = "Cookie-ID", value = 1234)
-   
-    response_cookies = response.headers.get('Set-Cookie')
+    #response.set_cookie(key = "Cookie-ID", value = 1234)
+
+    #response_cookies = response.headers.get('Set-Cookie')
     response_date = response.headers.get('Date')
     request_user_agent = request.headers.get('User-Agent')
-    response_header = response.headers
 
     file = open("./test.json",'w')
-    file.write(json.dumps({'datetime': response_date, 'cookie': response_cookies, 'useragent': request_user_agent, 'action': {'pageload': 'index'}}))
+    file.write(json.dumps({'datetime': response_date,'useragent': request_user_agent, 'action': 'pageload'}))
     file.write("\n")
     file.close()
 
@@ -46,7 +42,7 @@ def index():
     return flask.render_template(
             'index.html',
             title=index_title,
-            name=hello_name, requestHeader=request_header,requestMethod=request_method,responseHeader = response_header,responseCookies=response_cookies)
+            name=hello_name)
 
 
 ###
