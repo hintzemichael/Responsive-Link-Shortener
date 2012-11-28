@@ -4,11 +4,16 @@ import shelve
 from subprocess import check_output
 import flask
 from flask import request
+from flask import Response
+from time import gmtime,strftime
 from os import environ
-from flask import render_template
+import json
+
 
 app = flask.Flask(__name__)
 app.debug = True
+
+
 
 db = shelve.open("shorten.db")
 
@@ -16,12 +21,32 @@ db = shelve.open("shorten.db")
 def index():
     """Builds a template based on a GET request, with some default
     arguements"""
-    index_title = request.args.get("title", "Link Shortener")
-    hello_name = request.args.get("name", "Michael")
+    index_title = request.args.get("title", "Aijia's URL Shortener")
+    hello_name = request.args.get("name", "Aijia")
+   
+    request_header = request.headers
+    request_method = request.method
+   
+    response= flask.make_response()
+    response.headers['Date']=strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
+
+    response.set_cookie(key = "Cookie-ID", value = 1234)
+   
+    response_cookies = response.headers.get('Set-Cookie')
+    response_date = response.headers.get('Date')
+    request_user_agent = request.headers.get('User-Agent')
+    response_header = response.headers
+
+    file = open("./test.json",'w')
+    file.write(json.dumps({'datetime': response_date, 'cookie': response_cookies, 'useragent': request_user_agent, 'action': {'pageload': 'index'}}))
+    file.write("\n")
+    file.close()
+
+    
     return flask.render_template(
-           'index.html',
+            'index.html',
             title=index_title,
-            name=hello_name)
+            name=hello_name, requestHeader=request_header,requestMethod=request_method,responseHeader = response_header,responseCookies=response_cookies)
 
 
 ###
@@ -40,13 +65,19 @@ def image():
                 '-font', '/usr/share/fonts/thai-scalable/Waree-BoldOblique.ttf',
                 '-fill', 'black', '-pointsize', '32', '-draw',
                 "text 10,30 'My %s %s said i253 was %s'" % (relationship, name, adjective),
-                'png:-']), 200);
+                'png:-']), 200)
     # Comment in to set header below
     resp.headers['Content-Type'] = 'image/png'
     resp.headers['Accept']='*/*'
 
     return resp
 
+
+###
+# Below is an example of a shortened URL
+# We can set where /wiki redirects to with a PUT or POST command
+# and when we GET /wiki it will redirect to the specified Location
+##/
 @app.route("/wiki", methods=['PUT', 'POST'])
 def install_wiki_redirect():
     wikipedia = request.form.get('url', "http://en.wikipedia.org")
@@ -57,35 +88,40 @@ def install_wiki_redirect():
 def redirect_wiki():
     destination = db.get('wiki', '/')
     app.logger.debug("Redirecting to " + destination)
-    return redirect(destination)
+    return flask.redirect(destination) #depends on how we validate, the destination can be changed to "http://" + 
 
+
+###
+# Now we'd like to do this generally:
+# <short> will match any word and put it into the variable =short= Your task is
+# to store the POST information in =db=, and then later redirect a GET request
+# for that same word to the URL provided.  If there is no association between a
+# =short= word and a URL, then return a 404
+##/
 @app.route("/create", methods=['PUT', 'POST'])
 def create():
-    long_link = request.form.get('long-link')
-    short_link = request.form.get('short-link')
-    db[str(short_link)] = long_link
+    short_path = request.form.get('shorturl')
+    long_path = request.form.get('longurl')
+    db[str(short_path)] = long_path
 
-    '''request.user_agent.browser'''
-    request_header = request.headers
-
-    return flask.render_template(
-           'success.html', 
-            short=short_link, 
-            long=long_link,
-            requestHeader = str(request_header))
+    return flask.render_template("redirect.html", longPath=str(long_path), shortPath = str(short_path))    #The long URL:  " + str(long_path) + " has been successfully stored into " +  str(short_path) + "!"
 
 @app.route("/<short>", methods=['GET'])
 def redirect(short):
+
     destination = db.get(str(short))
-    if (destination is not None):
-        return flask.redirect('http://'+str(destination))
-    else: 
-        return flask.render_template('page_not_found.html'), 404
+    if destination != None:
+        return flask.redirect(destination)
+    else:
+        return flask.render_template('404.html', string=str(short))
+
+    
 
 @app.route("/<short>", methods=['DELETE'])
 def destroy(short):
-    raise NotImplementedError
-
+    """Remove the association between =short= and it's URL"""
+    db.get(str(short)).delete()
+    #raise NotImplementedError
 
 if __name__ == "__main__":
     app.run(port=int(environ['FLASK_PORT']))
