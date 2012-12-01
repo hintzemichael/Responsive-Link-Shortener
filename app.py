@@ -31,17 +31,18 @@ def index():
 
     response_cookies = request.cookies.get('Cookie_ID')
     current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
-    request_user_agent = request.headers.get('User-Agent')
+    request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
     action = 'page_load'
 
     f = open("test.json",'a')
     log_data = {}
     log_data['cookie_id'] = response_cookies
     log_data['date'] = current_date
-    log_data['browser'] = request_user_agent
+    log_data['browser'] = request_user_agent[1]
     log_data['action'] = action
     data = json.dumps(log_data)
     f.write(data)
+    f.write("\n")
     f.close()
 
     return render_template('index.html')
@@ -87,6 +88,22 @@ def create():
     short_link = request.form.get('short-link')
     db[str(short_link)] = long_link
 
+    response_cookies = request.cookies.get('Cookie_ID')
+    current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
+    request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
+    action = 'save_URL'
+
+    f = open("test.json",'a')
+    log_data = {}
+    log_data['cookie_id'] = response_cookies
+    log_data['date'] = current_date
+    log_data['browser'] = request_user_agent[1]
+    log_data['action'] = action
+    data = json.dumps(log_data)
+    f.write(data)
+    f.write("\n")
+    f.close()
+
     return flask.render_template(
            'success.html', 
             short=short_link, 
@@ -96,6 +113,22 @@ def create():
 def redirect(short):
     destination = db.get(str(short))
     if (destination is not None):
+        response_cookies = request.cookies.get('Cookie_ID')
+        current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
+        request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
+        action = 'redirect'
+
+        f = open("test.json",'a')
+        log_data = {}
+        log_data['cookie_id'] = response_cookies
+        log_data['date'] = current_date
+        log_data['browser'] = request_user_agent[1]
+        log_data['action'] = action
+        log_data['url'] = destination
+        data = json.dumps(log_data)
+        f.write(data)
+        f.write("\n")
+        f.close()
         return flask.redirect('http://'+str(destination))
     else: 
         return flask.render_template('page_not_found.html'), 404
