@@ -1,13 +1,9 @@
-{"date": "Mon, 03 Dec 2012 00:21:37 GMT", "action": "page_load", "cookie_id": "65fdee7b0bce6492ff1f32df9e8f1d96", "browser": "firefox"}
-{"date": "Mon, 03 Dec 2012 00:21:39 GMT", "action": "page_load", "cookie_id": "65fdee7b0bce6492ff1f32df9e8f1d96", "browser": "firefox"}
-{"date": "Mon, 03 Dec 2012 00:21:48 GMT", "action": "save_URL", "cookie_id": "65fdee7b0bce6492ff1f32df9e8f1d96", "browser": "firefox"}
-{"date": "Mon, 03 Dec 2012 00:21:49 GMT", "action": "redirect", "cookie_id": "65fdee7b0bce6492ff1f32df9e8f1d96", "url": "www.apple.com", "browser": "firefox"}
-{"date": "Mon, 03 Dec 2012 00:25:13 GMT", "action": "page_load", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "browser": "chrome"}
-{"date": "Mon, 03 Dec 2012 00:25:20 GMT", "action": "save_URL", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "browser": "chrome"}
-{"date": "Mon, 03 Dec 2012 00:25:21 GMT", "action": "redirect", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "www.blue.com", "browser": "chrome"}
-{"date": "Mon, 03 Dec 2012 00:25:25 GMT", "action": "redirect", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "www.blue.com", "browser": "chrome"}
-{"date": "Mon, 03 Dec 2012 00:25:32 GMT", "action": "page_load", "cookie_id": "392d31110021a8317a524892b573b383", "browser": "safari"}
-{"date": "Mon, 03 Dec 2012 00:25:35 GMT", "action": "page_load", "cookie_id": "392d31110021a8317a524892b573b383", "browser": "safari"}
-{"date": "Mon, 03 Dec 2012 00:25:36 GMT", "action": "page_load", "cookie_id": "392d31110021a8317a524892b573b383", "browser": "safari"}
-{"date": "Mon, 03 Dec 2012 00:25:42 GMT", "action": "save_URL", "cookie_id": "392d31110021a8317a524892b573b383", "browser": "safari"}
-{"date": "Mon, 03 Dec 2012 00:25:44 GMT", "action": "redirect", "cookie_id": "392d31110021a8317a524892b573b383", "url": "www.google.com", "browser": "safari"}
+{"date": "Mon, 03 Dec 2012 03:43:01 GMT", "action": "page_load", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "", "browser": "chrome"}
+{"date": "Mon, 03 Dec 2012 03:43:07 GMT", "action": "save_URL", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "www.apple.com", "browser": "chrome"}
+{"date": "Mon, 03 Dec 2012 03:43:09 GMT", "action": "redirect", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "www.apple.com", "browser": "chrome"}
+{"date": "Mon, 03 Dec 2012 03:43:15 GMT", "action": "page_load", "cookie_id": "dd078cec0c1721a90ac2a0b43407647c", "url": "", "browser": "chrome"}
+{"date": "Mon, 03 Dec 2012 03:43:32 GMT", "action": "save_URL", "cookie_id": "1fe32b603514a81ba9f08ad66407196e", "url": "www.google.com", "browser": "safari"}
+{"date": "Mon, 03 Dec 2012 03:43:33 GMT", "action": "redirect", "cookie_id": "1fe32b603514a81ba9f08ad66407196e", "url": "www.google.com", "browser": "safari"}
+{"date": "Mon, 03 Dec 2012 03:43:54 GMT", "action": "save_URL", "cookie_id": "db6df020461b272bb88b00a5e56a455b", "url": "www.gmail.com", "browser": "firefox"}
+{"date": "Mon, 03 Dec 2012 03:43:56 GMT", "action": "redirect", "cookie_id": "db6df020461b272bb88b00a5e56a455b", "url": "www.gmail.com", "browser": "firefox"}
+{"date": "Mon, 03 Dec 2012 03:44:01 GMT", "action": "redirect", "cookie_id": "db6df020461b272bb88b00a5e56a455b", "url": "www.gmail.com", "browser": "firefox"}

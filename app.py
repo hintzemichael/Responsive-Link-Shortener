@@ -40,6 +40,7 @@ def index():
     log_data['date'] = current_date
     log_data['browser'] = request_user_agent
     log_data['action'] = action
+    log_data['url'] = ''
     data = json.dumps(log_data)
     f.write(data)
     f.write("\n")
@@ -99,6 +100,7 @@ def create():
     log_data['date'] = current_date
     log_data['browser'] = request_user_agent
     log_data['action'] = action
+    log_data['url'] = long_link
     data = json.dumps(log_data)
     f.write(data)
     f.write("\n")
