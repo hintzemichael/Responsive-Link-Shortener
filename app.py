@@ -31,14 +31,14 @@ def index():
 
     response_cookies = request.cookies.get('Cookie_ID')
     current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
-    request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
+    request_user_agent = request.user_agent.browser
     action = 'page_load'
 
     f = open("test.json",'a')
     log_data = {}
     log_data['cookie_id'] = response_cookies
     log_data['date'] = current_date
-    log_data['browser'] = request_user_agent[1]
+    log_data['browser'] = request_user_agent
     log_data['action'] = action
     data = json.dumps(log_data)
     f.write(data)
@@ -90,14 +90,14 @@ def create():
 
     response_cookies = request.cookies.get('Cookie_ID')
     current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
-    request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
+    request_user_agent = request.user_agent.browser
     action = 'save_URL'
 
     f = open("test.json",'a')
     log_data = {}
     log_data['cookie_id'] = response_cookies
     log_data['date'] = current_date
-    log_data['browser'] = request_user_agent[1]
+    log_data['browser'] = request_user_agent
     log_data['action'] = action
     data = json.dumps(log_data)
     f.write(data)
@@ -115,14 +115,14 @@ def redirect(short):
     if (destination is not None):
         response_cookies = request.cookies.get('Cookie_ID')
         current_date = strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
-        request_user_agent = request.headers.get('User-Agent').split("Gecko) ", 1)
+        request_user_agent = request.user_agent.browser
         action = 'redirect'
 
         f = open("test.json",'a')
         log_data = {}
         log_data['cookie_id'] = response_cookies
         log_data['date'] = current_date
-        log_data['browser'] = request_user_agent[1]
+        log_data['browser'] = request_user_agent
         log_data['action'] = action
         log_data['url'] = destination
         data = json.dumps(log_data)
